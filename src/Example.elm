@@ -1,7 +1,7 @@
-import Text (plainText)
-import Random (..)
-import Check (..)
-import Signal (..)
+import Text exposing (plainText)
+import Random exposing (..)
+import Check exposing (..)
+import Signal exposing (..)
 import List
 
 prop_numberIsIdentity : Property

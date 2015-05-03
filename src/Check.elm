@@ -41,14 +41,14 @@ module Check
 
 -}
 
-import Random (Generator, list, generate, initialSeed, Seed, customGenerator)
-import List (map, map2, filter, length, head, (::))
-import Result (Result(..))
-import Time (every, second, Time)
+import Random exposing (Generator, list, generate, initialSeed, Seed, customGenerator)
+import List exposing (map, map2, filter, length, head, (::))
+import Result exposing (Result(..))
+import Time exposing (every, second, Time)
 import Signal
-import String (join)
-import Graphics.Element (Element)
-import Text (leftAligned, monospace, fromString)
+import String exposing (join)
+import Graphics.Element exposing (Element, leftAligned)
+import Text exposing (monospace, fromString)
 
 
 type alias Error =
