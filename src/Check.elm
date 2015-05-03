@@ -41,14 +41,15 @@ module Check
 
 -}
 
-import Random (Generator, list, generate, initialSeed, Seed, customGenerator)
-import List (map, map2, filter, length, head, (::))
-import Result (Result(..))
-import Time (every, second, Time)
+import Random exposing (Generator, list, generate, initialSeed, Seed, customGenerator)
+import List exposing (map, map2, filter, length, head, (::))
+import Maybe exposing (withDefault)
+import Result exposing (Result(..))
+import Time exposing (every, second, Time)
 import Signal
-import String (join)
-import Graphics.Element (Element)
-import Text (leftAligned, monospace, fromString)
+import String exposing (join)
+import Graphics.Element exposing (Element, leftAligned)
+import Text exposing (monospace, fromString)
 
 
 type alias Error =
@@ -279,11 +280,11 @@ printWith flattener results =
   in
     if (length errorResults == 0)
     then
-      case length results of
-        0 -> ""
-        n ->
-          case head results of
-            Ok {name} -> name ++ " has passed " ++ toString n ++ " tests!"
+      case results of
+        [] -> ""
+        (res :: _) ->
+          case res of
+            Ok {name} -> name ++ " has passed " ++ toString (length results) ++ " tests!"
             Err _ -> ""
     else
       (flattener
@@ -297,7 +298,7 @@ printWith flattener results =
           errorResults))
 
 printOne : TestResult -> String
-printOne = printWith head
+printOne = printWith (\tr -> withDefault "" (head tr))
 
 printMany : TestResult -> String
 printMany = printWith (join "\n")
